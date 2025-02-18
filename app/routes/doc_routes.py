@@ -6,6 +6,8 @@ from werkzeug.utils import secure_filename
 import requests
 from variaveis_da_api import bitrix_domain, bitrix_user_id, bitrix_token, folder_id
 import sqlite3
+import pytz 
+
 doc_bp  = Blueprint('doc_routes', __name__)
 
 
@@ -146,8 +148,12 @@ def enviar_arquivos():
 
         agora = datetime.now()
         data = agora.strftime("%Y-%m-%d")
-        hora = agora.strftime("%H:%M")
+        
 
+        fuso_horario = pytz.timezone('America/Sao_Paulo')
+        agora = datetime.now(fuso_horario)
+        hora = agora.strftime("%H:%M")
+    
         if not all([placa, km, descricao]):
             return jsonify({'error': 'Preencha todos os campos obrigatórios!'}), 400
 
