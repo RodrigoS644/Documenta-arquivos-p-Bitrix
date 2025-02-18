@@ -1,0 +1,93 @@
+/* Lista_de_arquivos_enviados.css */
+
+/* Estilo geral do corpo da página */
+body {
+    background-color: #0056b3; /* Azul especificado */
+    color: white; /* Texto branco para contraste */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Estilo do título principal */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra no texto */
+}
+
+/* Estilo dos parágrafos */
+p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3); /* Fundo semi-transparente preto */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borda branca sutil */
+}
+
+/* Estilo do container das mídias */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px; /* Espaçamento entre os cards */
+}
+
+/* Estilo dos cards de mídia */
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra mais escura */
+    margin: 10px;
+    overflow: hidden;
+    width: 300px;
+    border: 2px solid #000; /* Borda preta */
+}
+
+/* Estilo das imagens dentro dos cards */
+.card-img-top {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 2px solid #000; /* Borda preta na parte inferior da imagem */
+}
+
+/* Estilo dos vídeos dentro dos cards */
+video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 2px solid #000; /* Borda preta na parte inferior do vídeo */
+}
+
+/* Estilo do texto dentro dos cards */
+.card-body {
+    padding: 15px;
+    text-align: center;
+    background-color: #f8f9fa; /* Fundo cinza claro */
+}
+
+.card-text {
+    color: #333; /* Texto escuro para contraste com o fundo branco */
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Estilo responsivo para telas menores */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 2em; /* Título menor em telas pequenas */
+    }
+
+    p {
+        font-size: 16px; /* Texto menor em telas pequenas */
+    }
+}

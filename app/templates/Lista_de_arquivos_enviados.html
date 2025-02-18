@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivos Enviados</title>
+    <link rel="stylesheet" href="static/Lista_de_arquivos_enviados.css">
+</head>
+<body>
+    <h1>Arquivos Enviados</h1>
+    <p>Placa: {{ placa }}</p>
+    <p>KM: {{ km }}</p>
+    <p>Data: {{ data }}</p>
+    <p>Hora: {{ hora }}</p>
+    <p>Motorista: {{ motorista }}</p>
+    <p>Descrição: {{ descricao }}</p>
+    <p>ID da Task: {{ IDTASK }}</p>
+
+    <h3>Mídias enviadas </h3>
+    <div class="container">
+        <div class="row">
+            {% for file in media_files %}
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    {% if file.endswith('.jpg') or file.endswith('.png') %}
+                        <img src="{{ url_for('uploaded_file', filename=file) }}" alt="{{ file }}" class="card-img-top">
+                    {% elif file.endswith('.mp4') %}
+                        <video class="card-img-top" controls>
+                            <source src="{{ url_for('uploaded_file', filename=file) }}" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                    {% else %}
+                        <div class="card-body">
+                            <p class="card-text">Arquivo não suportado: {{ file }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if loop.index % 2 == 0 and not loop.last %}
+                </div><div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+</body>
+</html>

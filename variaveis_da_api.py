@@ -1,0 +1,5 @@
+bitrix_domain = "b24-gfozav.bitrix24.com.br"
+bitrix_user_id = "1"
+bitrix_token = "3viqi7epzcdo72yu"
+folder_id = "27"
+autor = "1"
