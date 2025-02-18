@@ -104,7 +104,7 @@ def salvar_config():
     autor = request.form.get("autor")
 
     # Valida se todos os campos foram preenchidos
-    if not all([bitrix_domain, bitrix_user_id, bitrix_token, folder_id, autor]):
+    if not all([bitrix_domain, bitrix_user_id, bitrix_token, folder_id]):
         return jsonify({"erro": "Todos os campos são obrigatórios!"}), 400
 
     # Salva as configurações no arquivo
@@ -121,5 +121,5 @@ def salvar_config():
     print("Configuração salva em variaveis_da_api.py!")
 
     # Retorna para a página de configurações sem precisar recarregar
-    return redirect(url_for("placa_task_bp.config"))
+    return redirect(url_for("placa_task_routes.config"))
 

@@ -4,9 +4,8 @@ from flask import current_app as app
 import os
 from werkzeug.utils import secure_filename
 import requests
-from variaveis_da_api import bitrix_domain, bitrix_user_id, bitrix_token, folder_id, autor
+from variaveis_da_api import bitrix_domain, bitrix_user_id, bitrix_token, folder_id
 import sqlite3
-
 doc_bp  = Blueprint('doc_routes', __name__)
 
 
