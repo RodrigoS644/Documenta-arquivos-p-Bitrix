@@ -127,7 +127,7 @@ def login():
 @login_bp.route('/menu', methods=['GET'])
 def menu():
     if 'usuario' not in session:  # Verifica se o usuário está autenticado na sessão
-     return redirect(url_for('/login'))
+     return redirect(url_for('login_routes.login'))
 
     usuario = session['usuario']  # Recupera os dados do usuário na sessão
     is_admin = bool(usuario[3])  # Verifica se o usuário é administrador
