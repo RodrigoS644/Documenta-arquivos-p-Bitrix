@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for,jsonify
+from flask import Blueprint, render_template, request, redirect, url_for,jsonify,session
 from configDB.Funcoes_placaTask import ( inserir_relacao_placa_task, consultar_relacoes_placa_task,
     atualizar_placa_task, deletar_relacao_placa_task, consultar_relacao_placa_task_por_id
 )
@@ -17,6 +17,8 @@ def listar_placa_task():
 # Rota para adicionar uma nova relação Placa-Task
 @placa_task_bp.route('/placa-task/adicionar', methods=['GET', 'POST'])
 def adicionar_placa_task():
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login'))
     if request.method == 'POST':
         nome = request.form.get('nome')
         placa = request.form.get('placa')
@@ -82,6 +84,7 @@ def salvar_configuracoes(config):
     # Rota para exibir o formulário de configurações
 @placa_task_bp.route("/config", methods=["GET"])
 def config():
+    
     
     return render_template("ConfiguracoesdaAPI.html")
 

@@ -161,4 +161,6 @@ def editar_usuario(id):
 
 @login_bp .route("/usuariosadmin")
 def listaradmin():
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login'))
     return render_template("lista_usuarios.html")
