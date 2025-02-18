@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Relações Placa-Task</title>
+    
+    <link rel="stylesheet" href="static/lista_placa_task.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Relações Placa-Task</h1>
+        <a href="{{ url_for('placa_task_routes.adicionar_placa_task') }}">Adicionar Nova Relação</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Placa</th>
+                    <th>ID Task</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for relacao in relacoes %}
+                <tr>
+                    <td>{{ relacao[0] }}</td>
+                    <td>{{ relacao[1] }}</td>
+                    <td>{{ relacao[2] }}</td>
+                    <td>{{ relacao[3] }}</td>
+                    <td>
+                        <a href="{{ url_for('placa_task_routes.editar_placa_task', id=relacao[0]) }}">
+                            <button>Editar</button>
+                        </a>
+                        <form action="{{ url_for('placa_task_routes.deletar_placa_task', id=relacao[0]) }}" method="POST" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta relação?')">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

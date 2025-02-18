@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+    <link rel="stylesheet" href="static/editar_usuario.css">
+    <style>
+
+/* static/editar_usuario.css */
+
+/* Estilos gerais */
+body {
+    background-color: #0056b3; /* Fundo azul */
+    font-family: Arial, sans-serif;
+    color: white; /* Texto branco para contraste */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+}
+
+/* Título */
+h1 {
+    color: white; /* Título branco */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Formulário */
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com transparência */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #0056b3; /* Cor azul para os labels */
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura */
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Botão */
+button {
+    background-color: #0056b3; /* Azul */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease; /* Efeito de transição suave */
+}
+
+button:hover {
+    background-color: #003366; /* Azul mais escuro ao passar o mouse */
+}
+
+/* Link "Voltar" */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: white; /* Texto branco para contraste */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Efeito de transição suave */
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #f0f0f0; /* Branco mais claro ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    body {
+        padding: 10px; /* Reduz o padding em telas menores */
+    }
+
+    form {
+        padding: 15px; /* Reduz o padding do formulário em telas menores */
+    }
+
+    h1 {
+        font-size: 20px; /* Reduz o tamanho do título em telas menores */
+    }
+}
+    </style>
+</head>
+<body>
+    <h1>Editar Usuário</h1>
+    <form action="{{ url_for('login_routes.editar_usuario', id=usuario[0]) }}" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ usuario[1] }}" required>
+        <br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" value="{{ usuario[2] }}" required>
+        <br>
+        <label>
+            <input type="checkbox" name="adm" {% if usuario[3] %}checked{% endif %}> Administrador
+        </label>
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+    <br>
+    <a href="{{ url_for('login_routes.listar_usuarios') }}">Voltar</a>
+</body>
+</html>

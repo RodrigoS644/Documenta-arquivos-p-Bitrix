@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Relação Placa-Task</title>
+    
+</head>
+ <style>
+  /* editar_placa_task.css */
+body {
+    background-color: #0056b3; /* Azul de fundo */
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    color: #0056b3; /* Azul para o título */
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    color: #0056b3; /* Azul para as etiquetas */
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #0056b3; /* Azul para o botão */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #004080; /* Azul mais escuro no hover */
+}
+
+a {
+    color: #0056b3; /* Azul para o link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline; /* Sublinhado no hover */
+}
+
+
+ </style>
+
+
+<body>
+    <div class="container">
+        <h1>Editar Relação Placa-Task</h1>
+        <form action="{{ url_for('placa_task_routes.editar_placa_task', id=relacao[0]) }}" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ relacao[1] }}" required>
+            <br>
+            <label for="placa">Placa:</label>
+            <input type="text" id="placa" name="placa" value="{{ relacao[2] }}" required>
+            <br>
+            <label for="id_task">ID Task:</label>
+            <input type="number" id="id_task" name="id_task" value="{{ relacao[3] }}" required>
+            <br>
+            <button type="submit">Salvar</button>
+        </form>
+        <br>
+        <a href="{{ url_for('placa_task_routes.listar_placa_task') }}">Voltar</a>
+    </div>
+</body>
+</html>
