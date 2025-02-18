@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuários</title>
+    <link rel="stylesheet" href="static/lista_usuarios.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .form-container input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+
+    <!-- Formulário para adicionar um novo usuário -->
+    <div class="form-container">
+        <h2>Adicionar Novo Usuário</h2>
+        <form action="{{ url_for('login_routes.adicionar_usuario') }}" method="POST">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <label>
+                <input type="checkbox" name="adm"> Administrador
+            </label>
+            <button type="submit">Adicionar</button>
+        </form>
+    </div>
+
+    <!-- Tabela para listar os usuários -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Senha</th>
+                <th>ADM</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario[0] }}</td>
+                <td>{{ usuario[1] }}</td>
+                <td>{{ usuario[2] }}</td>
+                <td>{{ 'Sim' if usuario[3] else 'Não' }}</td>
+                <td>
+                    <!-- Botão para editar usuário -->
+                    <a href="{{ url_for('login_routes.editar_usuario', id=usuario[0]) }}">
+                        <button>Editar</button>
+                    </a>
+                    <!-- Botão para excluir usuário -->
+                    <form action="{{ url_for('login_routes.deletar_usuario_route', id=usuario[0]) }}" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('login_routes.menu') }}">Voltar ao Menu</a>
+</body>
+</html>

@@ -27,7 +27,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 @login_bp.route('/usuarios', methods=['POST'])
 def adicionar_usuario():
     if 'usuario' not in session:  # Verifica se o usuário está autenticado
-        return redirect(url_for('user_routes.login'))
+        return redirect(url_for('login_routes.login'))
 
     if request.is_json:
         dados = request.json
@@ -42,13 +42,13 @@ def adicionar_usuario():
         return jsonify({"erro": "Nome e senha são obrigatórios!"}), 400
 
     inserir_usuario(nome, senha, adm)
-    return redirect(url_for('user_routes.listar_usuarios'))
+    return redirect(url_for('login_routes.listar_usuarios'))
 
 # Rota para listar todos os usuários (HTML)
 @login_bp.route('/usuarios', methods=['GET'])
 def listar_usuarios():
     if 'usuario' not in session:  # Verifica se o usuário está autenticado
-        return redirect(url_for('user_routes.login'))
+        return redirect(url_for('login_routes.login'))
 
     usuarios = consultar_usuarios()  # Obtém a lista de usuários do banco de dados
     return render_template('lista_usuarios.html', usuarios=usuarios)
@@ -58,7 +58,7 @@ def listar_usuarios():
 @login_bp.route('/usuarios/<int:id>', methods=['GET'])
 def buscar_usuario(id):
     if 'usuario' not in session:  # Verifica se o usuário está autenticado
-        return redirect(url_for('user_routes.login'))
+        return redirect(url_for('login_routes.login'))
 
     usuario = consultar_usuario_por_id(id)
     if usuario:
@@ -70,7 +70,7 @@ def buscar_usuario(id):
 @login_bp.route('/usuarios/<int:id>', methods=['PUT'])
 def atualizar_usuario_route(id):
     if 'usuario' not in session:  # Verifica se o usuário está autenticado
-        return redirect(url_for('user_routes.login'))
+        return redirect(url_for('login_routes.login'))
 
     dados = request.json
     novo_nome = dados.get('nome')
@@ -87,10 +87,10 @@ def atualizar_usuario_route(id):
 @login_bp.route('/usuarios/excluir/<int:id>', methods=['POST'])
 def deletar_usuario_route(id):
     if 'usuario' not in session:  # Verifica se o usuário está autenticado
-        return redirect(url_for('user_routes.login'))
+        return redirect(url_for('login_routes.login'))
 
     deletar_usuario(id)  # Chama a função para deletar o usuário
-    return redirect(url_for('user_routes.listar_usuarios'))  # Redireciona para a lista de usuários
+    return redirect(url_for('login_routes.listar_usuarios'))  # Redireciona para a lista de usuários
 
 
 # Rota para verificar login
@@ -140,7 +140,7 @@ def menu():
 @login_bp.route('/usuarios/editar/<int:id>', methods=['GET', 'POST'])
 def editar_usuario(id):
     if 'usuario' not in session:  # Verifica se o usuário está autenticado
-        return redirect(url_for('user_routes.login'))
+        return redirect(url_for('login_routes.login'))
 
     if request.method == 'GET':
         # Busca o usuário pelo ID
@@ -157,6 +157,8 @@ def editar_usuario(id):
         novo_adm = dados.get('adm', False)
 
         atualizar_usuario(id, novo_nome, nova_senha, novo_adm)
-        return redirect(url_for('user_routes.listar_usuarios'))
+        return redirect(url_for('login_routes.listar_usuarios'))
 
-
+@login_bp .route("/usuariosadmin")
+def listaradmin():
+    return render_template("lista_usuarios.html")
