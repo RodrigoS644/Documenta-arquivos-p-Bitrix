@@ -170,7 +170,7 @@ def enviar_arquivos():
         
         
     
-        media_files = os.listdir(app.config['UPLOAD_FOLDER'])
+        #media_files = os.listdir(app.config['UPLOAD_FOLDER'])
         
     
         return render_template('Lista_de_arquivos_enviados.html', placa=placa, km=km, data=data, hora=hora, motorista=motorista, descricao=descricao, IDTASK=IDTASK)
