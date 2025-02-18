@@ -1,7 +1,6 @@
 from flask import render_template , Blueprint
 import sys
 from flask import Blueprint, request, jsonify, render_template, Flask, session, redirect, url_for
-from flask import Flask
 import os
 from configDB.Funcoes_db import (
     inserir_usuario, consultar_usuarios, consultar_usuario_por_id,
@@ -118,7 +117,7 @@ def login():
             if usuario:
                 # Armazenar informações do usuário na sessão
                 session['usuario'] = usuario  # Armazenando o nome ou id do usuário, dependendo da necessidade
-                return redirect(url_for('user_routes.menu'))
+                return redirect(url_for('login_routes.menu'))
             else:
                 return jsonify({"erro": "Nome de usuário ou senha incorretos."}), 401
         except Exception as e:
