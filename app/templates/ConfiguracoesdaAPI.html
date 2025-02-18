@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações da API</title>
+    <link rel="stylesheet" href="static/ConfiguracoesdaAPI.css">
+    <script>
+        async function listarPastas() {
+            try {
+                const response = await fetch('/listar_pastas');
+                const pastas = await response.json();
+                const listaPastas = document.getElementById('lista-pastas');
+                listaPastas.innerHTML = '';
+
+                if (pastas.length > 0) {
+                    pastas.forEach(pasta => {
+                        const li = document.createElement('li');
+                        li.textContent = `ID: ${pasta.ID} - Nome: ${pasta.NAME}`;
+                        listaPastas.appendChild(li);
+                    });
+                } else {
+                    listaPastas.innerHTML = '<li>Nenhuma pasta encontrada.</li>';
+                }
+            } catch (error) {
+                console.error('Erro ao listar pastas:', error);
+            }
+        }
+
+        window.onload = listarPastas;
+    </script>
+</head>
+<body>
+    <h1>Configurações da API</h1>
+    <form action="{{ url_for('placa_task_routes.salvar_config') }}" method="POST">
+        <label for="bitrix_domain">Bitrix Domain:</label>
+        <input type="text" id="bitrix_domain" name="bitrix_domain" required autocomplete="off">
+    
+        <label for="bitrix_user_id">ID do usuário:</label>
+        <input type="text" id="bitrix_user_id" name="bitrix_user_id" required autocomplete="off">
+    
+        <label for="bitrix_token">Bitrix Token:</label>
+        <input type="text" id="bitrix_token" name="bitrix_token" required autocomplete="off">
+    
+        <label for="folder_id">ID da pasta para armazenamento:</label>
+        <input type="text" id="folder_id" name="folder_id" required autocomplete="off">
+    
+        <button type="submit">Salvar Configurações</button>
+    </form>
+    
+
+    <h2>Pastas no Bitrix</h2>
+    <ul id="lista-pastas">
+        <li>Carregando...</li>
+    </ul>
+</body>
+</html>

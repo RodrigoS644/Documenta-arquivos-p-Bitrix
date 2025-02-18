@@ -227,3 +227,18 @@ def uploaded_file(filename):
     UPLOADS_FOLDER = os.path.join(os.getcwd(), 'uploads')
     app.config['UPLOAD_FOLDER'] = 'uploads'
     return send_from_directory(UPLOADS_FOLDER, filename)
+
+
+@doc_bp .route('/listar_pastas')
+def listar_pastas():
+    """Rota para buscar as pastas do Bitrix e retornar como JSON."""
+    url = f"https://{bitrix_domain}/rest/{bitrix_user_id}/{bitrix_token}/disk.storage.getchildren?id=1"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Verifica se a requisição foi bem-sucedida
+        pastas = response.json().get('result', [])
+
+        return jsonify(pastas)
+    except requests.exceptions.RequestException as e:
+        return jsonify({'error': str(e)}), 500
+    
