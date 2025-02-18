@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,request,session,jsonify,current_app,send_from_directory
+from flask import Blueprint,render_template,request,session,jsonify,current_app,send_from_directory,url_for,redirect
 from datetime import datetime
 from flask import current_app as app
 import os
@@ -129,7 +129,9 @@ def adicionar_comentario_bitrix(texto, ids_arquivos,IDTASK):
 
 
 @doc_bp .route('/enviarArquivosDoMotorista', methods=['POST'])
-def enviar_arquivos():  
+def enviar_arquivos(): 
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login')) 
  
 
 
@@ -189,6 +191,9 @@ def enviar_arquivos():
     
 @doc_bp .route("/listar-veiculos", methods=["GET"])
 def listar_veiculos():
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login')) 
+
     conn = None
     try:
         # Conecta ao banco de dados
@@ -220,10 +225,15 @@ def listar_veiculos():
 
 @doc_bp .route("/documentar-veiculo")
 def documentar_veiculo():
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login')) 
     return render_template("Formulario_Upload.html")
 
 @doc_bp .route('/uploads/<filename>')
 def uploaded_file(filename):
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login')) 
+    
     UPLOADS_FOLDER = os.path.join(os.getcwd(), 'uploads')
     app.config['UPLOAD_FOLDER'] = 'uploads'
     return send_from_directory(UPLOADS_FOLDER, filename)
@@ -231,6 +241,8 @@ def uploaded_file(filename):
 
 @doc_bp .route('/listar_pastas')
 def listar_pastas():
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login')) 
     """Rota para buscar as pastas do Bitrix e retornar como JSON."""
     url = f"https://{bitrix_domain}/rest/{bitrix_user_id}/{bitrix_token}/disk.storage.getchildren?id=1"
     try:

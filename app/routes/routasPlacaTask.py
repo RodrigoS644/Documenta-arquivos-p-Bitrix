@@ -30,6 +30,8 @@ def adicionar_placa_task():
 # Rota para editar uma relação Placa-Task
 @placa_task_bp.route('/placa-task/editar/<int:id>', methods=['GET', 'POST'])
 def editar_placa_task(id):
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login'))
     relacao = consultar_relacao_placa_task_por_id(id)
     if not relacao:
         return jsonify({"erro": f"Relação com ID {id} não encontrada."}), 404
@@ -45,6 +47,8 @@ def editar_placa_task(id):
 # Rota para deletar uma relação Placa-Task
 @placa_task_bp.route('/placa-task/deletar/<int:id>', methods=['POST'])
 def deletar_placa_task(id):
+    if 'usuario' not in session:  # Verifica se o usuário está autenticado
+        return redirect(url_for('login_routes.login'))
     deletar_relacao_placa_task(id)
     return redirect(url_for('placa_task_routes.listar_placa_task'))
 
