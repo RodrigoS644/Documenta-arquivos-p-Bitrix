@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal</title>
+     <link rel="stylesheet" href="static/menu_principal.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            
+            <li><a href="/documentar-veiculo">Documentar Veículos</a></li>
+            
+            {% if show_admin %}
+                <li><a href="/usuariosadmin">Configuração de Usuarios</a></li>
+                <li> <a href="/placa-task">Adicionar relação TASK/PLACA</a></li>
+                <li> <a href="/config">Configuração de API</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</body>
+</html>

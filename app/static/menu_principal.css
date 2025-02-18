@@ -1,0 +1,64 @@
+/* Resetando margens e paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilizando o corpo da página */
+body {
+    background-color: #0056b3; /* Azul Vellon Telecom */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Estilizando a navegação */
+nav {
+    background-color: #ffffff; /* Branco para contraste */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Estilizando a lista */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 15px 0;
+}
+
+/* Links do menu */
+nav ul li a {
+    text-decoration: none;
+    color: #0056b3; /* Azul Vellon */
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    padding: 12px;
+    background-color: #e0e0e0; /* Cinza claro */
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Efeito hover */
+nav ul li a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    nav {
+        width: 95%;
+    }
+}

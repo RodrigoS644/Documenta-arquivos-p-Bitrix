@@ -1,6 +1,13 @@
 # run.py
 
 from app import create_app
+from flask import Flask
+
+
+
+  # Carrega variáveis do .env
+app = Flask(__name__)
+
 
 # Cria a aplicação Flask
 app = create_app()
